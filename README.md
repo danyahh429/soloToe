@@ -1,2 +1,2 @@
 # soloToe
-javascript ran tic tac toe application made to demonstrap knowledge of bootsrap and js
+javascript run Tic-Tac-Toe application made to demonstrate knowledge of bootsrap and js

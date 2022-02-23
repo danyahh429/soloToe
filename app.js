@@ -18,15 +18,6 @@ const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 /* Game management messages and functions */
 statusDisplay.innerHTML = currentPlayerTurn();
 
-function CellPlayed(clickedBox, clickedBoxIndex) {
-    gameState[clickedBoxIndex] = currentPlayer;
-    clickedBox.innerHTML = currentPlayer;
-
-}
-
-function turnChange() {
-
-}
 const winningConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -37,6 +28,18 @@ const winningConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+
+
+function CellPlayed(clickedCell, clickedCellIndex) {
+    gameState[clickedCellIndex] = currentPlayer;
+    clickedCell.innerHTML = currentPlayer;
+}
+
+function turnChange() {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusDisplay.innerHTML = currentPlayerTurn();
+}
+
 
 /* Values in arrays for our winningConditions are indexes for cells that need 
    to be populated by the same player for them to be considered a victor.*/
@@ -72,30 +75,33 @@ function resultValidation() {
     /*
 if no one ghas one continue if possible.
 */
-turnChange();
+    turnChange();
 }
 
-function onBoxClick(clickedBoxEvent) {
-    const clickedBox = clickedBoxEvent.target;
+function handleCellClick(clickedCellEvent) {
+    const clickedCell = clickedCellEvent.target;
     /* Grab data-cell-index; a string is returned but a number is reuqired
         so it is parsed Int */
-    const clickedBoxIndex = parseInt(
-        clickedBox.getAttribute('data-cell-index')
-    );
+    const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
     /* Checjk if box has been played before*/
-    if (gameState[clickedBoxIndex] !== "" || !gameActive) {
+    if (gameState[clickedCellIndex] !== "" || !gameActive) {
         return;
     }
 
-    handleBoxPlayed(clickedBox, clickedBoxIndex);
+    CellPlayed(clickedCell, clickedCellIndex);
     resultValidation();
 }
 
 function gameReset() {
-
+    gameActive = true;
+    currentPlayer = "X";
+    gameState = ["", "", "", "", "", "", "", "", ""];
+    statusDisplay.innerHTML = currentPlayerTurn();
+    document.querySelectorAll('.cell')
+        .forEach(cell => cell.innerHTML = "");
 }
 
 
 /* Event Listeners for button and boxes*/
-document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', onBoxClick));
-document.querySelector('.resetGame').addEventListener('click', gameReset);
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+document.querySelector('#resetGame').addEventListener('click', gameReset);
