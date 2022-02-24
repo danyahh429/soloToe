@@ -18,7 +18,7 @@ line-height: 100px;
     font-size: 60px;
 }
 
-.lead {
+#message {
     font-family: 'Gloria Hallelujah', cursive;
 }
   
@@ -33,3 +33,27 @@ a:hover {
     background-color: transparent;
     text-decoration: underline;
 }
+
+#iconList{
+    padding-top: 300px;
+}
+
+#lefty{
+    color:#333333;
+    text-decoration: underline;
+}
+
+#git{
+    color:#333333
+}
+
+#lefty:hover{
+    color:rgb(211, 200, 200)
+}
+
+#jumbo{
+    padding-top: 100;
+}
+
+
+
