@@ -17,5 +17,8 @@ section {
 line-height: 100px;
     font-size: 60px;
 }
-  
+
+.lead {
+    font-family: 'Gloria Hallelujah', cursive;
+}
   
